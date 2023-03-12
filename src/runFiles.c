@@ -5,7 +5,7 @@
  * 
  * The second is to create the files from inside C
  */
-#include "../include/preMadeFiles.h"
+#include "../include/runFiles.h"
 
 void runAMPL(char *amplPath, char *amplInputFile, char *outFile)
 {
@@ -41,6 +41,9 @@ void runAMPL_default(char *amplPath, char *amplInputFile)
     runAMPL(amplPath, amplInputFile, "output.txt");
 }
 
+/**
+ * Used For debugging the above functions
+ */
 int main(int argc, char *argv[])
 {
     runAMPL_default(argv[1], argv[2]);

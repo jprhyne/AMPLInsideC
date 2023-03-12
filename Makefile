@@ -1,4 +1,4 @@
-all: preMadeFiles
+all: runFiles
 
-preMadeFiles: src/preMadeFiles.c include/preMadeFiles.h
-	gcc src/preMadeFiles.c -o bin/preMadeFiles
+runFiles: src/runFiles.c include/runFiles.h
+	gcc src/runFiles.c -o bin/runFiles
