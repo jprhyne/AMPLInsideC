@@ -10,3 +10,11 @@ ampl_linux-intel64/*
 .*.swp
 include/.*.swp
 src/.*.swp
+
+output.txt
+out.txt
+preMadeFiles/out.txt
+preMadeFiles/output.txt
+preMadeFiles/runner
+runner
+sudoku.*
