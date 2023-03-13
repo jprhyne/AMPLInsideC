@@ -14,11 +14,16 @@ int main(int argc, char *argv[])
         runAMPL("../ampl_linux-intel64/ampl", "sudoku.command","output.txt");
         int *finalGrid = readOutFile("output.txt");
         for (int i = 0; i < 9; i++) {
+            if (i % 3 == 0)
+                printf("----------------------\n");
             for (int j = 0; j < 9; j++) {
+                if (j % 3 == 0)
+                    printf("|");
                 printf("%d ", finalGrid[i + j * 9]);
             }
-            printf("\n");
+            printf("|\n");
         }
+        printf("----------------------\n");
         free(finalGrid);
     } else {
         writeModelFile("sudoku.mod");
@@ -49,11 +54,16 @@ int main(int argc, char *argv[])
         runAMPL("./ampl_linux-intel64/ampl", "sudoku.command", "out.txt");
         int *finalGrid = readOutFile("out.txt");
         for (int i = 0; i < 9; i++) {
+            if (i % 3 == 0)
+                printf("----------------------\n");
             for (int j = 0; j < 9; j++) {
+                if (j % 3 == 0)
+                    printf("|");
                 printf("%d ", finalGrid[i + j * 9]);
             }
-            printf("\n");
+            printf("|\n");
         }
+        printf("----------------------\n");
         free(finalGrid);
     }
 }
