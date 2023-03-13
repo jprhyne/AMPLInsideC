@@ -1,3 +1,4 @@
+
 model sudoku.mod;
 data  sudoku.dat;
 option solver "../ampl_linux-intel64/cplex";

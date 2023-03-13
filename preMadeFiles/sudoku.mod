@@ -2,8 +2,8 @@ set x := {1, 2, 3, 4, 5, 6, 7, 8, 9}; # x-coordinate inside our grid
 set y := {1, 2, 3, 4, 5, 6, 7, 8, 9}; # y-coordinate inside our grid
 set value := {1, 2, 3, 4, 5, 6, 7, 8, 9}; # value that is taken at coordinate (i,j)
 
-#3D variable representing our initial data
 param givenInfo {x,y,value} binary;
+
 # 3D variable where the value at grid[i,j,k] = 1 
 # if and only if the number k is present at the
 # coordinate (i,j) inside our 9x9 grid
@@ -38,7 +38,9 @@ subject to onePerBox {(i,j,k) in {offset, offset, value}}:
 # per cell in our grid
 subject to onePerCell {(i,j) in {x, y}}:
 	sum {k in value} grid[i,j,k] = 1;
-
+	
 # Constraint that ensures we don't violate the given data
 subject to startData {(i,j,k) in {x,y,value}}:
 	grid[i,j,k] >= givenInfo[i,j,k];
+	
+	
