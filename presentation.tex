@@ -1,9 +1,9 @@
 \documentclass{beamer}
-
+\usepackage{subcaption} 
 \title{Using AMPL inside C}
 \author{Johnathan Rhyne}
 \institute{CU Denver}
-\date{14 March 2023}
+\date{\today}
 \usetheme{Rochester}
 \begin{document}
     \frame{\titlepage}
@@ -55,7 +55,19 @@
     \end{frame}
     \begin{frame}
         \frametitle{Example AMPL Files}
-        Insert screenshot of the AMPL IDE with these files
-    \end{frame}
+        \includegraphics[width=.9\textwidth]{figures/presentationFile.png}
+   \end{frame}
+   \begin{frame}
+   \end{frame}
     \subsection{All Inside C}
+    \begin{frame}
+        \frametitle{All Inside C: Key Things to Consider}
+        \begin{itemize}
+            \item No official API like Java, Python, C++
+            \item However, can do most of it through basic File I/O
+        \end{itemize}
+    \end{frame}
+    \begin{frame}
+        \frametitle{Example C File
+    \end{frame}
 \end{document}

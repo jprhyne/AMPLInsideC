@@ -24,6 +24,8 @@ set x := {1, 2, 3, 4, 5, 6, 7, 8, 9}; # x-coordinate inside our grid\n\
 set y := {1, 2, 3, 4, 5, 6, 7, 8, 9}; # y-coordinate inside our grid\n\
 set value := {1, 2, 3, 4, 5, 6, 7, 8, 9}; # value that is taken at coordinate (i,j)\n\
 \n\
+#3D variable representing our initial data\n\
+param givenInfo {x,y,value} binary;\n\
 # 3D variable where the value at grid[i,j,k] = 1 \n\
 # if and only if the number k is present at the\n\
 # coordinate (i,j) inside our 9x9 grid\n\
@@ -57,7 +59,11 @@ subject to onePerBox {(i,j,k) in {offset, offset, value}}:\n\
 # Constraint that ensures we only have 1 number\n\
 # per cell in our grid\n\
 subject to onePerCell {(i,j) in {x, y}}:\n\
-	sum {k in value} grid[i,j,k] = 1\n");
+	sum {k in value} grid[i,j,k] = 1;\n\
+\n\
+# Constraint that ensures we don't violate the given data\n\
+subject to startData {(i,j,k) in {x,y,value}}:\n\
+	grid[i,j,k] >= givenInfo[i,j,k];\n");
     fclose(fp);
 }
 
@@ -75,13 +81,14 @@ void writeDataFile(char *dataFile, int grid[9][9])
     // Create a file pointer and start our file
     FILE *fp = fopen(dataFile, "w");
     fprintf(fp,"data;\n\n");
+    fprintf(fp, "for{(i,j,k) in {x,y,value}} {let givenInfo[i,j,k] := 0}");
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
             if (grid[i][j] != 0) {
                 // This means we want to write out 
                 // let grid[i,j,grid[i][j]] := 1;
                 // Note: this is a bit of an abuse of notation
-                fprintf(fp, "let grid[%d,%d,%d] := 1;\n", i + 1,j + 1, grid[i][j]);
+                fprintf(fp, "let givenInfo[%d,%d,%d] := 1;\n", i + 1,j + 1, grid[i][j]);
             }
         }
     }
@@ -136,17 +143,21 @@ int *readOutFile(char *outFile)
         // to parse this line or now
         // If the first character is g,:, or ;
         // then it contains no information we want to grab
-        if (line[0] == 'g' || line[0] == ':' || line[0] == ';' || line[0] == '\n')
+        if (line[0] == 'g' || line[0] == ':' ||  line[0] == '\n')
             continue;
+        if (line[0] == ';') {
+            value++;
+            continue;
+        }
         // If it is not a skipping line,
         // then read it in in its entirety
         int row;
         int *nums = (int *) malloc(9 * sizeof(int));
         sscanf(line, "%d %d %d %d %d %d %d %d %d %d", &row, nums, nums + 1, nums + 2, nums + 3, nums + 4, nums + 5, nums + 6, nums + 7, nums + 8);
-        // Yes the above is ugly, but it is aquickish way to read in our output
+        // Yes the above is ugly, but it is a quickish way to read in our output
         for (int i = 0; i < 9; i++){
             if (nums[i] == 1) {
-                grid[row, i] = value++;
+                grid[row - 1 + i * 9] = value;
                 break;
             }
         }
@@ -163,16 +174,35 @@ int main()
     int grid[9][9];
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
-            if (rand() % 4 == 0) 
-                grid[i][j] = rand() % 10;
-            else 
-                grid[i][j] = 0;
-            
+            grid[i][j] = 0;
         }
     }
+    // Lazy way of initially making the grid
+    // You could instead read in a bunch of files 
+    // containing real sudoku grids
+    // This will create a random "valid" starting state
+    srand(time(NULL));
+    grid[0][0] = rand()%10;
+    grid[1][3] = rand()%10;
+    grid[2][6] = rand()%10;
+    grid[3][1] = rand()%10;
+    grid[4][4] = rand()%10;
+    grid[5][7] = rand()%10;
+    grid[6][2] = rand()%10;
+    grid[7][5] = rand()%10;
+    grid[8][8] = rand()%10;
 
     writeDataFile("sudoku.dat", grid);
     writeCommandFile("sudoku.dat", "sudoku.mod", "./ampl_linux-intel64/cplex", "sudoku.command");
     
     runAMPL("./ampl_linux-intel64/ampl", "sudoku.command", "out.txt");
+    int *finalGrid = readOutFile("out.txt");
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            printf("%d ", finalGrid[i + j * 9]);
+        }
+        printf("\n");
+    }
+    free(finalGrid);
+
 }
