@@ -15,7 +15,7 @@ void runAMPL(char *amplPath, char *amplInputFile, char *outFile)
     int outFileLen = strlen(outFile);
     // Build a string to contain our command to pass to the system method
     int commandLength = amplPathLen + amplInputLen + outFileLen + 10; 
-    char *command = (char *) malloc((commandLength + 1) * sizeof(char));
+    char *command = (char *) calloc((commandLength + 1) , sizeof(char));
     for (int i = 0; i < amplPathLen; i++) {
         command[i] = amplPath[i];
     }
@@ -44,7 +44,9 @@ void runAMPL_default(char *amplPath, char *amplInputFile)
 /**
  * Used For debugging the above functions
  */
+/*
 int main(int argc, char *argv[])
 {
     runAMPL_default(argv[1], argv[2]);
 }
+*/

@@ -2,3 +2,11 @@
 *.o
 # Compiled Files
 bin/*
+
+#ampl installation for licensing reasons
+ampl_linux-intel64/*
+
+# vim swap files
+.*.swp
+include/.*.swp
+src/.*.swp
