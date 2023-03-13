@@ -22,7 +22,10 @@
     \section{Problem Overview}
     \begin{frame}
         \frametitle{What is Sudoku?}
-        Insert image of sudoku grid 
+        \begin{figure}
+            \includegraphics[scale=0.25]{figures/sudokuGrid.png}
+            \caption{Source: Integer Programming - Michele conforti Gerard Cornuejols Giacomo Zambelli}
+        \end{figure}
     \end{frame}
     \begin{frame}
         \frametitle{Sudoku as an Integer Program}
@@ -41,7 +44,7 @@
     \begin{frame}
         \frametitle{Use Case For External File Creation}
         \begin{itemize}
-            \item Hard problems
+            \item Already tried running it locally, so you have the files
             \item Running on a cluster with no GUI or very high latency
             \item Only part of what you are trying to solve
         \end{itemize}
@@ -57,15 +60,35 @@
         \frametitle{Example AMPL Files}
         \includegraphics[width=\textwidth]{figures/presentationFile.png}
    \end{frame}
+   \begin{frame}
+        \frametitle{Command File}
+        \includegraphics[width=\textwidth]{figures/sudokuCommand.png}
+   \end{frame}
+   \begin{frame}
+       \frametitle{Calling From C!}
+        system(amplPath \textless \, commandFilePath \textgreater \,outputFilePath)
+   \end{frame}
+   \begin{frame}
+       \frametitle{Nice Output}
+        \centering
+        \includegraphics[scale=.75]{figures/exampleOutput.png}
+   \end{frame}
     \subsection{All Inside C}
     \begin{frame}
         \frametitle{All Inside C: Key Things to Consider}
         \begin{itemize}
             \item No official API like Java, Python, C++
-            \item However, can do most of it through basic File I/O
+            \item However, can do most of it through basic File I/O and system calls!
         \end{itemize}
     \end{frame}
     \begin{frame}
         \frametitle{Example C File}
+        \centering
+        \includegraphics[scale=.35]{figures/insideCCode.png}
+    \end{frame}
+    \begin{frame}
+        \frametitle{Example Output}
+        \centering
+        \includegraphics[scale=.75]{figures/randomOutput.png}
     \end{frame}
 \end{document}
