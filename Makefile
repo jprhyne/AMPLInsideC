@@ -1,4 +1,4 @@
-all: createFiles
+all: runner 
 
 runFiles.o: src/runFiles.c include/runFiles.h include/runFiles.h
 	gcc -c src/runFiles.c
@@ -6,8 +6,11 @@ runFiles.o: src/runFiles.c include/runFiles.h include/runFiles.h
 createFiles.o: src/createFiles.c include/createFiles.h include/runFiles.h
 	gcc -c src/createFiles.c
 
-createFiles: createFiles.o runFiles.o
-	gcc createFiles.o runFiles.o -o createFiles; rm createFiles.o runFiles.o
+runner.o: src/runner.c include/createFiles.h include/runFiles.h
+	gcc -c src/runner.c
+
+runner: runFiles.o createFiles.o runner.o
+	gcc runFiles.o createFiles.o runner.o -o runner; cp runner preMadeFiles/
 
 clean:
-	rm createFiles sudoku.dat sudoku.mod sudoku.command out.txt
+	rm runner preMadeFiles/runner sudoku.dat sudoku.mod sudoku.command out.txt output.txt runFiles.o createFiles.o runner.o

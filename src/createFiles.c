@@ -105,12 +105,12 @@ void writeCommandFile(char *dataFile, char *modelFile, char *solverPath, char *c
 {
     FILE *fp = fopen(commandFile, "w");
     fprintf(fp, 
-            "\n\
-            model %s;\n\
-            data  %s;\n\
-            option solver \"%s\";\n\
-            solve;\n\
-            display {k in value}: {i in x, j in y} grid[i,j,k];",
+"\n\
+model %s;\n\
+data  %s;\n\
+option solver \"%s\";\n\
+solve;\n\
+display {k in value}: {i in x, j in y} grid[i,j,k];",
             modelFile, dataFile, solverPath);
     // model fileName; loads the file as a model file
     // data fileName; loads the file as a data file
@@ -167,7 +167,7 @@ int *readOutFile(char *outFile)
     fclose(fp);
     return grid;
 }
-
+/*
 int main()
 {
     writeModelFile("sudoku.mod");
@@ -206,3 +206,4 @@ int main()
     free(finalGrid);
 
 }
+*/

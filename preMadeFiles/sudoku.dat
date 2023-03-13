@@ -1,0 +1,11 @@
+data;
+
+for{(i,j,k) in {x,y,value}} {let givenInfo[i,j,k] := 0}let givenInfo[1,1,5] := 1;
+let givenInfo[2,4,5] := 1;
+let givenInfo[3,7,1] := 1;
+let givenInfo[4,2,2] := 1;
+let givenInfo[5,5,7] := 1;
+let givenInfo[6,8,9] := 1;
+let givenInfo[7,3,2] := 1;
+let givenInfo[8,6,4] := 1;
+end;
