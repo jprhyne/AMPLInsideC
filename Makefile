@@ -13,4 +13,4 @@ runner: runFiles.o createFiles.o runner.o
 	gcc runFiles.o createFiles.o runner.o -o runner; cp runner preMadeFiles/
 
 clean:
-	rm runner preMadeFiles/runner sudoku.dat sudoku.mod sudoku.command out.txt output.txt runFiles.o createFiles.o runner.o
+	rm runner preMadeFiles/runner sudoku.dat sudoku.mod sudoku.command out.txt output.txt runFiles.o createFiles.o runner.o preMadeFiles/out.txt preMadeFiles/output.txt
