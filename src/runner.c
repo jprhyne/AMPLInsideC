@@ -47,6 +47,18 @@ int main(int argc, char *argv[])
         grid[6][2] = rand()%10;
         grid[7][5] = rand()%10;
         grid[8][8] = rand()%10;
+        
+        for (int i = 0; i < 9; i++) {
+            if (i % 3 == 0)
+                printf("----------------------\n");
+            for (int j = 0; j < 9; j++) {
+                if (j % 3 == 0)
+                    printf("|");
+                printf("%d ", grid[i][j]);
+            }
+            printf("|\n");
+        }
+        printf("----------------------\n");
     
         writeDataFile("sudoku.dat", grid);
         writeCommandFile("sudoku.dat", "sudoku.mod", "./ampl_linux-intel64/cplex", "sudoku.command");

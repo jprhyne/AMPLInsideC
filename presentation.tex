@@ -31,12 +31,12 @@
         \frametitle{Sudoku as an Integer Program}
         \footnotesize
         \begin{align*}
+            x_{ijk}\in\{0,1\} &, \qquad 1\leq ijk\leq 9 \\
+            x_{ijk} = 1 &,  \qquad\text{When the initial board has number $k$ in cell $(i,j)$.}\\
             \sum_{i=1}^9 x_{ijk} = 1&,\qquad 1\leq jk\leq 9\qquad\qquad\text{(each number $k$ appears in each column)}\\
             \sum_{j=1}^9 x_{ijk} = 1&,\qquad 1\leq ik\leq 9\qquad\qquad\text{(each number $k$ appears in each row)} \\
             \sum_{q,r=0}^2x_{i+q,j+r,k} = 1&, \qquad i,j=1,4,7,\, 1\leq k \leq 9 \qquad\text{(each $k$ appears once in each box)}\\
             \sum_{k=1}^9 x_{ijk} = 1&,\qquad 1\leq ij\leq 9\qquad\qquad\text{(each cell contains exactly one number)} \\
-            x_{ijk}\in\{0,1\} &, \qquad 1\leq ijk\leq 9 \\
-            x_{ijk} = 1 &,  \qquad\text{When the initial board has number $k$ in cell $(i,j)$.}
         \end{align*}
     \end{frame}
     \section{Embedding in C}
@@ -89,7 +89,7 @@
     \begin{frame}
         \frametitle{Example Output}
         \centering
-        \includegraphics[scale=.75]{figures/randomOutput.png}
+        \includegraphics[width=.75\textwidth]{figures/randomInOut.png}
     \end{frame}
     \section{Extensions}
     \begin{frame}
@@ -97,6 +97,14 @@
         \begin{itemize}
             \item Arrow Sum Lines
             \item Killer Boxes
+        \end{itemize}
+    \end{frame}
+    \section{Links}
+    \begin{frame}
+        \frametitle{Links}
+        \begin{itemize}
+            \item \href{https://github.com/jprhyne/AMPLInsideC}{My Repository}
+            \item \href{https://ampl.com/ce}{AMPL Community Edition}
         \end{itemize}
     \end{frame}
 \end{document}
